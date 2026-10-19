@@ -1,0 +1,55 @@
+{
+  "name": "@massdriver/opencode",
+  "version": "0.1.0",
+  "description": "Massdriver for opencode: bundle development skill, agents, commands, MCP server, and a production safety guard.",
+  "license": "Apache-2.0",
+  "author": "Massdriver <support@massdriver.cloud> (https://massdriver.cloud)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/massdriver-cloud/opencode-plugin.git"
+  },
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "massdriver",
+    "infrastructure-as-code",
+    "platform-engineering",
+    "mcp"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "claudePlugin": {
+    "repository": "https://github.com/massdriver-cloud/claude-plugins.git",
+    "ref": "7b8cdf707ce42899545eea1cb4d57c90e1c9610a",
+    "path": "massdriver"
+  },
+  "scripts": {
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "sync": "node scripts/sync-claude-plugin.mjs",
+    "build": "npm run clean && npm run sync && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@opencode-ai/plugin": "^1.19.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.8.2",
+    "vitest": "^3.2.4",
+    "yaml": "^2.8.0"
+  }
+}
