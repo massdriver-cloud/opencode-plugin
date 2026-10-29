@@ -1,6 +1,6 @@
 {
   "name": "@massdriver/opencode",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Massdriver for opencode: bundle development skill, agents, commands, MCP server, and a production safety guard.",
   "license": "Apache-2.0",
   "author": "Massdriver <support@massdriver.cloud> (https://massdriver.cloud)",
