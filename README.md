@@ -202,3 +202,21 @@ The skill, agents, commands and the MCP launcher script come from [massdriver-cl
 Agents and commands get a small set of rewrites, listed in `scripts/translate.mjs`, for the places where opencode differs from Claude Code: tool names, the agent name prefix, and the settings file location. If a rewrite stops matching the upstream text, the build fails so the change gets reviewed.
 
 To update, change `claudePlugin.ref` to a newer claude-plugins commit and rebuild. To build against a local checkout, set `CLAUDE_PLUGINS_DIR=/path/to/claude-plugins`.
+
+## Releasing
+
+Bump the version on a branch and merge it to `main` through a pull request:
+
+```bash
+npm version 0.2.0 --no-git-tag-version
+git commit -am "Release v0.2.0"
+```
+
+After the merge, tag the merged commit and push the tag:
+
+```bash
+git checkout main && git pull
+git tag v0.2.0 && git push origin v0.2.0
+```
+
+The tag starts the Release workflow. It checks that the tag matches `package.json`, builds and tests the package, and waits for approval in the `npm-publish` environment. After approval it publishes to npm, then creates a GitHub release with generated notes. A version with a suffix, such as `v0.2.0-rc.1`, goes to the `next` dist-tag on npm and is marked as a pre-release on GitHub.
